@@ -1,0 +1,134 @@
+<%- include('header.ejs') %>
+    <div class="todocontainer">
+        <div class="formholder">
+
+            <div class="logocontainer">
+                <img src="/assets/Group 1.svg" alt="">
+                <h1>Recipe Roadmap</h1>
+            </div>
+            <form class="formdata" action="/submit" method="POST">
+
+
+                <div>
+                    <label for="Name">Recipe Name :</label>
+                    <input type="text" name="Name">
+                </div>
+                <div>
+                    <label for="Time">Meal Time (mins) : </label>
+                    <input type="number" name="Time">
+                </div>
+                <div>
+                    <label for="Ingredients">Ingredients : </label>
+                    <input type="text" name="Ingredients">
+                </div>
+                <div class="instructions">
+                    <label for="Instructions">Instructions : </label>
+                    <textarea cols="20" rows="5" name="Instructions"></textarea>
+                </div>
+                <div class="butcontainer">
+                    <button type="submit">Add Recipe</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    </body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            color: #FEF7F7;
+            background-size: cover;
+            font-family: 'Itim', cursive;
+            background-image: linear-gradient(rgb(246, 216, 216), rgba(60, 60, 60, 0.5)), url('/assets/pexels-ella-olsson-3026802.jpg');
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .logocontainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        img {
+            height: 5rem;
+            width: 5rem;
+        }
+
+        .todocontainer {
+            display: flex;
+            background-color: #FEF7F7;
+            background-image: linear-gradient(rgb(246, 216, 216), rgba(60, 60, 60, 0.5)), url('/assets/pexels-ella-olsson-3026802.jpg');
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .formholder {
+            display: flex;
+            flex-direction: column;
+            opacity: 0.8;
+            background-color: #DF7C78;
+            border-radius: 2rem;
+            padding: 2rem;
+        }
+
+        .formdata {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+
+        textarea,
+        input[type=text],
+        input[type=number] {
+            border-radius: 1rem;
+            border: none;
+            padding: 0.5rem;
+            outline: none;
+        }
+
+        textarea,
+        input[type=text]:active,
+        input[type="text"]:focus {
+            border-radius: 1rem;
+            border: none;
+        }
+
+        button {
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            background-color: #F8D1D1;
+            color: #DF7C78;
+            font-family: 'Itim', cursive;
+
+        }
+
+        .butcontainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 35%;
+        }
+
+        .instructions {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+
+    <%- include('footer.ejs') %>

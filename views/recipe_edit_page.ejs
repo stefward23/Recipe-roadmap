@@ -1,0 +1,135 @@
+<%- include('header.ejs') %>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+        html {
+            height: 100%;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            height: 100%;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            width: 60rem;
+            border-radius: 2rem;
+            opacity: 0.8;
+            background-color: #DF7C78;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            width: 25rem;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .update {
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            background-color: #F8D1D1;
+            color: #DF7C78;
+            font-family: 'Itim', cursive;
+            font-size: large;
+
+        }
+
+        .box {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            gap: 1rem;
+            width: 25rem;
+        }
+
+
+
+        textarea,
+        input[type=text],
+        input[type=number] {
+            border-radius: 1rem;
+            border: none;
+            padding: 0.5rem;
+            outline: none;
+        }
+
+        textarea,
+        input[type=text]:active,
+        input[type="text"]:focus {
+            border-radius: 1rem;
+            border: none;
+        }
+
+        .btn {
+            display: flex;
+            margin-top: 1rem;
+            width: 25rem;
+            justify-content: flex-end;
+        }
+    </style>
+    <html>
+
+    <body>
+        <div class="main">
+            <h1>
+                <%=recipe.Name%>
+            </h1>
+            <div class="wrapper">
+                <div class="left">
+                    <p>Time: <%=recipe.Time%> mins
+                    </p>
+                    <p>Ingredients: <%=recipe.Ingredients%>
+                    </p>
+                    <p>Instructions: <%=recipe.Instructions%>
+                    </p>
+
+                </div>
+                <form action="/update-recipe" method="POST">
+                    <div class="right">
+
+                        <div class="box">
+                            <input type="hidden" name="id" value="<%= recipe.id %>" />
+
+                            <h4>Meal Time (mins) :
+                            </h4>
+                            <input type="number" value="<%=recipe.Time%>" name="Time">
+                        </div>
+                        <div class="box">
+                            <h4>Ingredients :
+                            </h4>
+                            <input type="text" value="<%=recipe.Ingredients%>" name="Ingredients">
+                        </div>
+                        <div class="box">
+                            <h4>Instructions :
+                            </h4>
+                            <textarea name="Instructions" cols="20" rows="5"><%=recipe.Instructions%></textarea>
+                        </div>
+                        <div class="btn">
+                            <button type="submit" class="update">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </body>
+
+    </html>
+
+    <%- include('footer.ejs') %>

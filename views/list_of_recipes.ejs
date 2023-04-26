@@ -1,0 +1,185 @@
+<%- include('header.ejs') %>
+    <div class="todocontainer">
+        <div id="container">
+            <h1 id="container-title">List of Recipes</h1>
+            <div id="list-container">
+                <form id="form-control">
+                    <% if(recipe.length> 0) {%>
+
+                        <% recipe.forEach((item)=> { %>
+                            <div class="row">
+                                <!-- <input class="radio" type="radio" value="<%=item.id %>"> -->
+                                <a href="/recipe_edit_page/<%=item.id %>" class="item">
+                                    <%=item.Name %>
+                                </a>
+                                <span class="delete" id="<%= item.id %>">Delete</span>
+
+                            </div>
+
+                            <% }); %>
+                                <% } else { %>
+                                    <div class="row">
+                                        <!-- <input class="radio" type="radio"> -->
+                                        <a href="/home" class="item">
+                                            No Recipes found, Please add a recipe in the previous form.
+                                        </a>
+                                    </div>
+                                    <% } %>
+                                    <div id="button-row-container">
+                                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    </body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+
+        #container {
+            border-radius: 2rem;
+            gap: 5rem;
+            opacity: 0.8;
+            background-color: #DF7C78;
+            padding: 1rem;
+
+        }
+
+        .todocontainer {
+            display: flex;
+            background-color: #FEF7F7;
+            background-image: linear-gradient(rgb(246, 216, 216), rgba(60, 60, 60, 0.5)), url('/assets/pexels-ella-olsson-3026802.jpg');
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #container-title {
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        #list-container {
+            background-color: #ffffff;
+            border-radius: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 1.5rem;
+
+        }
+
+        #form-control {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .radio {
+            appearance: none;
+            -webkit-appearance: none;
+            background: #F8D2D1;
+            border: 3px solid #f5b7b5;
+            outline: 1px solid #f5b7b5;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-top: 2rem;
+
+        }
+
+        .radio:checked {
+            background: #ed9996;
+            outline: 1px solid #f5b7b5;
+        }
+
+
+        .item {
+            width: 47rem;
+            background-color: #E49E9C;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            padding: 3px;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .item:hover {
+            text-decoration: underline;
+            color: white;
+        }
+
+        #button-row-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: flex-end;
+            width: 60rem;
+            margin: 1rem;
+        }
+
+
+        .delete {
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            background-color: #F8D1D1;
+            color: #DF7C78;
+            font-family: 'Itim', cursive;
+            font-size: large;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+
+        }
+    </style>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            console.log("Loaded!");
+            const deleteBtnArr = document.getElementsByClassName("delete");
+            // const selected = document.getElementsByClassName("radio")
+
+
+            const deleteBtnClickHandler = (event) => {
+                // console.log("pressed delete!");
+                // if (selected.value == event.currentTarget.id) {
+                //     console.log("Ids match")
+
+                fetch("/delete-recipe", {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ id: event.currentTarget.id }),
+                })
+                    .then(() => {
+                        window.location.reload();
+                    })
+                    .catch((err) => console.log("err", err));
+                console.log("event", event.currentTarget.id);
+            };
+
+
+            Array.from(deleteBtnArr).forEach((deleteBtn) => {
+    //   console.log("deleteBtn", deleteBtn);
+      deleteBtn.addEventListener("click", deleteBtnClickHandler);
+    });
+  });
+
+    </script>
+
+    <%- include('footer.ejs') %>
